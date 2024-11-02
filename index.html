@@ -1,13 +1,96 @@
-<html>
-    <head>
-        <title>Techevity</title>
-    </head>
-    <body>
-        <h1>Hello World</h1>
-        <h2>Hello World</h2>
-        <h3>Hello World</h3>
-        <h4>Hello World</h4>
-        <h5>Hello World</h5>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Website Coming Soon</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
 
+			body {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				height: 100vh;
+				background-color: #333;
+				color: #f1f1f1;
+				font-family: Arial, sans-serif;
+			}
+
+			.container {
+				text-align: center;
+			}
+
+			h1 {
+				font-size: 2.5rem;
+				margin-bottom: 1rem;
+			}
+
+			p {
+				font-size: 1.2rem;
+				margin-bottom: 2rem;
+			}
+
+			.countdown {
+				display: flex;
+				gap: 1.5rem;
+				font-size: 1.5rem;
+				justify-content: center;
+			}
+
+			.countdown div {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			span {
+				font-size: 2.5rem;
+				font-weight: bold;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Our Website is Coming Soon!</h1>
+			<p>We're working hard to finish the development. Stay tuned!</p>
+			<div class="countdown">
+				<div><span id="days">0</span> DAYS</div>
+				<div><span id="hours">0</span> HOURS</div>
+				<div><span id="minutes">0</span> MINUTES</div>
+				<div><span id="seconds">0</span> SECONDS</div>
+			</div>
+		</div>
+
+		<script>
+			const countdownDate = new Date("2024-12-31T00:00:00").getTime();
+
+			function updateCountdown() {
+				const now = new Date().getTime();
+				const distance = countdownDate - now;
+
+				const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+				const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+				const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+				const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+				document.getElementById("days").innerText = days;
+				document.getElementById("hours").innerText = hours;
+				document.getElementById("minutes").innerText = minutes;
+				document.getElementById("seconds").innerText = seconds;
+
+				if (distance < 0) {
+					clearInterval(countdownInterval);
+					document.querySelector(".countdown").innerHTML = "We're Live!";
+				}
+			}
+
+			const countdownInterval = setInterval(updateCountdown, 1000);
+		</script>
+	</body>
 </html>
